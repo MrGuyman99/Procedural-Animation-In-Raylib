@@ -12,6 +12,9 @@ public:
     raylib::Vector2 Position;
 
 private:
+    
+    raylib::Vector2 ResetWithinCircle(raylib::Vector2 Point);
     bool WithinCircle(raylib::Vector2 Point);
+    raylib::Vector2 speed;
 
 };

@@ -6,7 +6,7 @@ int main(){
 
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     raylib::Window window(800, 600, "Distance Constraint");
-    window.SetTargetFPS(100);
+    window.SetTargetFPS(60);
     Test_Circle Circle = Test_Circle(100, raylib::Vector2(500, 400));
     raylib::Vector2 Point(500, 400);
 
@@ -23,5 +23,4 @@ int main(){
 
         EndDrawing();
     }
-
 }
