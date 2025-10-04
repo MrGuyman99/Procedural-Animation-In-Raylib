@@ -1,14 +1,12 @@
 #include "Test_Circle.hpp"
 #include<raylib-cpp.hpp>
-#include<iostream>
-#include<cmath>
+#include<imgui.h>
 
 Test_Circle::Test_Circle(int radius, raylib::Vector2 Position){
 
     //Setting Global Variables
     this->Position = Position;
     this->radius = radius;
-    speed = raylib::Vector2(-1, 1);
 
 }
 
@@ -22,19 +20,17 @@ bool Test_Circle::WithinCircle(raylib::Vector2 Point){
 
 raylib::Vector2 Test_Circle::ResetWithinCircle(raylib::Vector2 Point){
 
+    //If Position and the Point's Position are equal
+    if(Position == Point){
+        return raylib::Vector2(Position.GetX() + radius, Position.GetY());
+    }
+
     //Calculating the Distance Between the Midpoint of the Circle and the given point's position     
     float Point_dx = Point.GetX() - Position.GetX();
     float Point_dy = Point.GetY() - Position.GetY();
     
     //Calculate the Distance from the center to the point
-    float distance = (std::pow(Point_dx, 2) + std::pow(Point_dy, 2));
-
-    //If the point is exactly at the center
-    if (distance <= 1e-8f) {
-        return raylib::Vector2(Position.GetX() + radius, Position.GetY());
-    }
-
-    distance = std::sqrt(distance);
+    float distance = std::sqrt(std::pow(Point_dx, 2) + std::pow(Point_dy, 2));
 
     //Normalizing the direction
     //(I would use a variable called Normalized_Point_Dx or something like that, but I figure it's better practice this way)
@@ -52,7 +48,7 @@ raylib::Vector2 Test_Circle::ResetWithinCircle(raylib::Vector2 Point){
 raylib::Vector2 Test_Circle::Update(raylib::Vector2 PointPosition){
 
     //If MousePosition is within the Circle, set the circle's center to equal the current mouse position
-    if(WithinCircle(GetMousePosition()) == true){
+    if(IsMouseButtonDown(MOUSE_BUTTON_RIGHT)){
 
         Position.SetX(GetMouseX());
         Position.SetY(GetMouseY());
@@ -69,6 +65,15 @@ raylib::Vector2 Test_Circle::Update(raylib::Vector2 PointPosition){
     }
 
     return{PointPosition};
+
+}
+
+void Test_Circle::RenderUI(){
+    
+    //Simple UI stuff, nothing too complicated
+    ImGui::Begin("CircleUI Window");
+        ImGui::SliderInt("Radius", &radius, 8, 100);
+    ImGui::End();
 
 }
 
