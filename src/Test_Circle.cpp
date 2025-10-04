@@ -73,6 +73,12 @@ void Test_Circle::RenderUI(){
     //Simple UI stuff, nothing too complicated
     ImGui::Begin("CircleUI Window");
         ImGui::SliderInt("Radius", &radius, 8, 100);
+        if(ImGui::Button("Reset", ImVec2(64, 24))){
+
+            Position = raylib::Vector2(GetScreenWidth() / 2, GetScreenHeight() / 2);
+
+        }
+    
     ImGui::End();
 
 }
