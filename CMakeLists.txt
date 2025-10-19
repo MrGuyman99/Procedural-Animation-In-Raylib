@@ -16,7 +16,7 @@ set(SOURCES
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 set_target_properties(${PROJECT_NAME} PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "/home/bodie/DeveloperStuff/Tests/RaylibCpp"    
+    RUNTIME_OUTPUT_DIRECTORY ".."    
 )
 
 target_link_libraries(${PROJECT_NAME} 
