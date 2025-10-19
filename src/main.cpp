@@ -1,6 +1,7 @@
-#include "Test_Circle.hpp"
+#include "LeaderCircle.hpp"
 #include<raylib-cpp.hpp>
 #include<rlImGui.h>
+#include "Follow_Circle.hpp"
 
 int main(){
 
@@ -9,7 +10,8 @@ int main(){
     window.SetTargetFPS(60);
     rlImGuiSetup(true);
     
-    Test_Circle Circle = Test_Circle(100, raylib::Vector2(500, 400));
+    LeaderCircle Circle = LeaderCircle(100, raylib::Vector2(500, 400), "Leader Circle Window");
+    Follow_Circle FCircle(75, raylib::Vector2(400, 300), "Follow Circle Window");
     raylib::Vector2 Point(500, 400);
 
     while(window.ShouldClose() == false){
@@ -17,13 +19,18 @@ int main(){
         BeginDrawing();
             
             window.ClearBackground(DARKGRAY);
-            Point.SetX(Circle.Update(Point).GetX());
-            Point.SetY(Circle.Update(Point).GetY());
+            FCircle.Position = Circle.Update(FCircle.Position);
+            Point = FCircle.Update(Point);
             Circle.Draw();
-            Point.DrawCircle(75, PURPLE);
+            FCircle.Draw();
+            //ONLY Call for Leader circle
+            Circle.Control();
+            
+            Point.DrawCircle(50, PURPLE);
             DrawFPS(3, 3);
             rlImGuiBegin();
                 Circle.RenderUI();
+                FCircle.RenderUI();
             rlImGuiEnd();
         EndDrawing();
     }

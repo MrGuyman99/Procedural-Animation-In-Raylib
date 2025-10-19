@@ -11,7 +11,7 @@ include(cmake/imgui.cmake)
 
 set(SOURCES 
     src/main.cpp   
-    src/Test_Circle.cpp
+    src/LeaderCircle.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})
