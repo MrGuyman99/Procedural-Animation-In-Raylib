@@ -31,5 +31,8 @@ cd build
 cmake ..
 cmake --build .
 ```
-The executable should be in the root directory
+- Open the ProceduralAnimation.sln file that generated
+- Set it as the startup project
+- Press compile
+The executable should be in the root directories' release folder
 That's it for me, hope you enjoy. There may or may not be commits after this one, as I'm relatively happy with where the codebase is.
